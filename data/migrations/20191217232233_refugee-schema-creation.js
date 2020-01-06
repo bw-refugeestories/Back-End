@@ -9,7 +9,7 @@ exports.up = function(knex) {
       tbl.string('username').notNullable().unique();
       tbl.string('password').notNullable();
     })
-    .createTable('queuedStories', tbl => {
+    .createTable('pendingStories', tbl => {
       tbl.increments();
 
       tbl.string('storyName').notNullable().unique();
@@ -29,5 +29,5 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-  .dropTableIfExists('queuedStories').dropTableIfExists('acceptedStories').dropTableIfExists('admins')
+  .dropTableIfExists('pendingStories').dropTableIfExists('acceptedStories').dropTableIfExists('admins')
 };

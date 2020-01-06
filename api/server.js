@@ -5,16 +5,12 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const db = require('../data/dbConfig')
 const authRouter = require('../auth/authRoute')
+const acceptedStoriesRouter = require('../stories/acceptedStories')
 
 server.use(morgan(), helmet(), cors(), express.json())
 
-server.get('/', (req, res) => {
-  db('acceptedStories')
-  .then( admins => {
-    res.status(200).json(admins)
-  })
-})
-
-server.use('/auth', authRouter)
+server.use('/auth', authRouter);
+server.use('/acceptedStories', acceptedStoriesRouter);
+// server.use('./pendingStories', pendingStoriesRouter)
 
 module.exports = server
