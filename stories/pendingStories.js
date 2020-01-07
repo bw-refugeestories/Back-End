@@ -6,7 +6,7 @@ const multer = require('multer')
 const upload = multer({dest: "uploads/"});
 
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/add', upload.single('image'), (req, res) => {
 
   async function addStory() {
     const storyName = req.body.storyName;
