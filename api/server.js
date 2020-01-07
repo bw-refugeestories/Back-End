@@ -5,12 +5,13 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const db = require('../data/dbConfig')
 const authRouter = require('../auth/authRoute')
-const acceptedStoriesRouter = require('../stories/acceptedStories')
+const acceptedStoriesRouter = require('../stories/acceptedStories');
+const pendingStoriesRouter = require('../stories/pendingStories');
 
 server.use(morgan(), helmet(), cors(), express.json())
 
 server.use('/auth', authRouter);
 server.use('/acceptedStories', acceptedStoriesRouter);
-// server.use('./pendingStories', pendingStoriesRouter)
+server.use('/pendingStories', pendingStoriesRouter)
 
 module.exports = server
