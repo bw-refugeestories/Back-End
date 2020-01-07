@@ -4,4 +4,16 @@ function find() {
   return db('acceptedStories')
 }
 
-module.exports = {find}
+function findByID(id) {
+  return db('acceptedStories').where({id})
+}
+
+function findByName(storyName) {
+  return db('acceptedStories').where({storyName})
+}
+
+module.exports = {
+  find,
+  findByID,
+  findByName
+}

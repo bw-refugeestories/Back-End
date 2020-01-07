@@ -12,7 +12,7 @@ exports.up = function(knex) {
     .createTable('pendingStories', tbl => {
       tbl.increments();
 
-      tbl.string('storyName').notNullable().unique();
+      tbl.string('storyName').notNullable();
       tbl.string('storyImg').notNullable();
       tbl.text('storyContent').notNullable();
       tbl.string('author')
@@ -20,7 +20,7 @@ exports.up = function(knex) {
     .createTable('acceptedStories', tbl => {
       tbl.increments();
 
-      tbl.string('storyName').notNullable().unique();
+      tbl.string('storyName').notNullable();
       tbl.string('storyImg').notNullable();
       tbl.text('storyContent').notNullable();
       tbl.string('author')
