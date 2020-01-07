@@ -21,7 +21,7 @@ router.post('/add', upload.single('image'), (req, res) => {
     
     helpers.add(storyInfo)
     .then( story => {
-      res.status(200).json(story)
+      res.status(200).json({message: "Story added!"})
     })
     .catch( err => {
       res.status(500).json({message: 'There was an error with the server'})
@@ -36,10 +36,24 @@ router.post('/approve/:id', (req, res) => {
 
   helpers.approve(id)
     .then(result => {
-      res.status(202).json({message: 'Successfully approved!'})
+      helpers.deleteByID(id)
+      .then(res.status(202).json({message: 'Successfully approved!'}))
+      .catch(err => {res.status(500).json(err)})
     })
     .catch(err => {
       res.status(500).json({message: 'There was an error with the server'})
+    })
+})
+
+router.delete('/delete/:id', (req, res) => {
+  const {id} = req.params;
+
+  helpers.deleteByID(id)
+    .then( result => {
+      res.status(200).json({message: "deleted!"})
+    })
+    .catch( err => {
+      res.status(500).json({message: 'There is a problem with the server'})
     })
 })
 

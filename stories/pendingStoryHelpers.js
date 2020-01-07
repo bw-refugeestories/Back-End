@@ -17,7 +17,7 @@ function findByID(id) {
 }
 
 function approve(id) {
-  findByID(id)
+  return findByID(id)
     .then(story => {
       return db('acceptedStories').insert(story[0])
     })

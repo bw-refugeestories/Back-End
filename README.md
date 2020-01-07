@@ -31,7 +31,7 @@ Sections:
   }
   ```
 
-##Accepted Stories Endpoints
+## Accepted Stories Endpoints
 
 ### /acceptedStories/
 
