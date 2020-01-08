@@ -38,9 +38,9 @@ Sections:
 Returns array of all currently approved stories
 
 
-## Pending Stories Endpoint
+## Pending Stories Endpoints
 
-### /pendingStories/add 
+### /pendingStories/add POST
   Expects and image with name: "image", and objeCt with format...
   ```
   {
@@ -48,3 +48,15 @@ Returns array of all currently approved stories
     "storyContent": "story goes here"
   }
   ```
+
+### /pendingStories/approve/:id
+  Expects id in the URl. If a post is found, it will be added to the "acceptedStories" database and the story will be removed from "pendingStories". Upon successful approval, server will respond with {message: "Approved!"}
+
+### /pendingStories/delete/:id DELETE
+  Expects id to be passed in the url parameter. Upon successful delete, should return {message: "deleted"}
+
+### /pendingStories GET
+  Should return array of all stories pending approval
+
+### /pendingStories/:id GET
+  Expects id in URl, should return single story upon success.
