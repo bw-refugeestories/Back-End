@@ -4,6 +4,7 @@ const router = express.Router();
 const helpers = require('./pendingStoryHelpers')
 const multer = require('multer')
 const upload = multer({dest: "uploads/"});
+const protected = require('../middleware/restricted-middleware');
 
 
 router.post('/add', upload.single('image'), (req, res) => {
@@ -31,7 +32,7 @@ router.post('/add', upload.single('image'), (req, res) => {
   addStory();
 })
 
-router.post('/approve/:id', (req, res) => {
+router.post('/approve/:id', protected, (req, res) => {
   const {id} = req.params;
 
   helpers.approve(id)
@@ -45,7 +46,7 @@ router.post('/approve/:id', (req, res) => {
     })
 })
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id', protected, (req, res) => {
   const {id} = req.params;
 
   helpers.deleteByID(id)
@@ -57,7 +58,7 @@ router.delete('/delete/:id', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', protected, (req, res) => {
   const {id} = req.params
   helpers.findByID(id)
    .then( results => {
@@ -65,7 +66,7 @@ router.get('/:id', (req, res) => {
    })
 })
 
-router.get('/', (req, res) => {
+router.get('/', protected, (req, res) => {
   helpers.find()
     .then(stories => {
       res.status(200).json(stories)

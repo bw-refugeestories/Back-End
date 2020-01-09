@@ -16,5 +16,5 @@ module.exports = (req, res, next) => {
     })
   } else {
     res.status(400).json({message: 'Please log in then try again!'})
-  }
-}
+  };
+};
