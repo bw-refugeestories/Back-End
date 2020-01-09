@@ -37,6 +37,9 @@ Sections:
 
 Returns array of all currently approved stories
 
+### /acceptedstories/id 
+
+Returns single story matching ID
 
 ## Pending Stories Endpoints
 
