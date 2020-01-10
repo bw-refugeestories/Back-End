@@ -8,15 +8,20 @@ const protected = require('../middleware/restricted-middleware');
 
 
 router.post('/add', upload.single('image'), (req, res) => {
+  console.log(req.body)
 
   async function addStory() {
     const storyName = req.body.storyName;
-    const storyContent = req.body.storyContent
-    var imgURL = 'hi'
-    await cloudinary.uploader.upload(req.file.path, function(error, result) {
+    const storyContent = req.body.storyContent;
+    var imgURL = 'https://res.cloudinary.com/dce9vfmth/image/upload/v1578337504/migration-3129299_1920_ul2pcc.jpg';
+    
+    
+    if (req.file) {
+      await cloudinary.uploader.upload(req.file.path, function(error, result) {
       console.log(error, result);
       imgURL = result.url
-    })
+      })
+    };
     console.log(imgURL)
     const storyInfo = {storyName: storyName, storyImg: imgURL, storyContent: storyContent}
     

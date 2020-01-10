@@ -19,7 +19,7 @@ function generateToken(user) {
 
 
 router.post('/register', (req, res) => {
-  const adminInfo = req.body
+  const adminInfo = req.body;
 
   if (adminInfo.firstName && adminInfo.lastName && adminInfo.username && adminInfo.password) {
     const hash = bcrypt.hashSync(adminInfo.password, 10)

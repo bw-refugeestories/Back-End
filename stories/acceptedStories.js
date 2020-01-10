@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const {id} = req.params
   helpers.findByID(id)
-    .then(res => res.status(200).json(res))
+    .then(story => res.status(200).json(story))
     .catch(err => res.status(500).json(err))
 })
 

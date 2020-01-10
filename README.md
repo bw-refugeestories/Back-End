@@ -44,7 +44,7 @@ Returns single story matching ID
 ## Pending Stories Endpoints
 
 ### /pendingStories/add POST
-  Expects and image with name: "image", and objeCt with format...
+  Expects and requiers an image with name: "image", and objeCt with format...
   ```
   {
     "storyName": "randoName",
