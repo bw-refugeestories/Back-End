@@ -20,9 +20,18 @@ function findByID(id) {
   return db('admins').select('username', 'id').where({id})
 }
 
+function deleteByID(id) {
+  return db('admins').where({id}).del().returning('id')
+}
+
+function modify(id, usernameUpdate, passwordUpdate, firstNameUpdate, lastNameUpdate) {
+  return db('admins').where({id}).update({username: usernameUpdate, password: passwordUpdate, firstName: firstNameUpdate, lastName: lastNameUpdate}).returning('id', 'username', 'firstName', 'lastName', 'password')
+}
+
 module.exports = {
   add,
   find,
   findByID,
-  findByFilter
+  findByFilter,
+  deleteByID
 }

@@ -56,10 +56,6 @@ router.post('/approve/:id', protected, (req, res) => {
     })
 })
 
-router.put('/modify/:id', (req, res) => {
-
-})
-
 router.delete('/delete/:id', protected, (req, res) => {
   const {id} = req.params;
 

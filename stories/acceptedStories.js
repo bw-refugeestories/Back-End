@@ -25,10 +25,25 @@ router.delete('/delete/:id', protected, (req, res) => {
 
   helpers.deleteByID(id)
     .then( result => {
-      res.status(200).json({message: "deleted!"})
+      res.status(200).json({message: "deleted!", id: result})
     })
     .catch( err => {
       res.status(500).json({message: 'There is a problem with the server'})
+    })
+})
+
+router.put('/modify/:id', protected, (req, res) => {
+  const {id} = req.params;
+  const contentUpdate = req.body.storyContent;
+  const imageUpdate = req.body.storyImg;
+  const nameUpdate = req.body.storyName;
+
+  helpers.modify(id, contentUpdate, nameUpdate, imageUpdate )
+    .then(result => {
+      res.status(200).json(result)
+    })
+    .catch( err => {
+      res.status(500).json({message: 'There is something wrong with the server'})
     })
 })
 

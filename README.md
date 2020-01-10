@@ -8,6 +8,25 @@ Sections:
 
 ## Authorized User Endpoints
 
+### /auth/ GET
+
+Returns all registered users
+
+### /auth/delete/id
+
+Deletes user with given id. Returns id
+
+
+### /auth/modify/id PUT
+  Expects an object with format...
+  ```
+  {
+    "firstName": "updated first name",
+    "lastName": "updates last name",
+    "username": "updated username",
+    "password": "updated password"
+  }
+
 ### /auth/register POST
 
   Expects an object with format...
@@ -33,13 +52,28 @@ Sections:
 
 ## Accepted Stories Endpoints
 
-### /acceptedStories/
+### /acceptedStories/ GET
 
 Returns array of all currently approved stories
 
-### /acceptedstories/id 
+### /acceptedstories/id  GET
 
 Returns single story matching ID
+
+### /acceptedStories/delete/id DELETE
+
+Deletes story with given ID. Returns id
+
+### /acceptedstories/modify/id PUT
+
+Requires object with format...
+```
+{
+  "storyContent": "updated story",
+  "storyImg": "updated image URL",
+  "storyName":"updated name of story"
+}
+```
 
 ## Pending Stories Endpoints
 

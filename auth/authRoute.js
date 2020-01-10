@@ -57,4 +57,38 @@ router.post('/login', (req, res) => {
   }
 })
 
+router.get('/', (req, res) => {
+  helpers.find()
+    .then( users => res.status(200).json(users))
+    .catch(err => res.status(500).json({message: 'There was an error with the server'}))
+})
+
+router.get('/:id', (req, res) => {
+  const {id} = req.params;
+
+  helpers.findByID(id)
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(500).json({message: "There was an error with the server"}))
+})
+
+router.delete('/delete/:id', (req, res) => {
+  const {id} = req.params;
+
+  helpers.deleteByID(id)
+    .then( result => res.status(200).json({message: 'Deleted!', id: result}))
+    .catch(err => res.status(500).json({message: 'There is an error with the server'}))
+  })
+
+router.put('/modify/:id', (req, res) => {
+  const {id} = req.params;
+  const usernameUpdate = req.body.usernameUpdate;
+  const passwordUpdate = req.body.passwordUpdate;
+  const firstNameUpdate = req.body.firstNameUpdate;
+  const lastNameUpdate = req.body.lastNameUpdate;
+
+  helpers.modify(id, usernameUpdate, passwordUpdate, firstNameUpdate, lastNameUpdate)
+    .then( result => res.status(200).json(result))
+    .catch(err => res.status(500).json({message: 'Something is wrong with the server'}))
+})
+
 module.exports = router
