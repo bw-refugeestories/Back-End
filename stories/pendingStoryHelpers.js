@@ -9,7 +9,7 @@ function find(info) {
 }
 
 function deleteByID(id) {
-  return db('pendingStories').where({id}).del()
+  return db('pendingStories').where({id}).del().returning('id')
 }
 
 function findByID(id) {
@@ -23,9 +23,6 @@ function approve(id) {
     })
 }
 
-function modify(id) {
-  return db('pendingStories').where({id}).update()
-}
 module.exports = {
   add,
   deleteByID,
