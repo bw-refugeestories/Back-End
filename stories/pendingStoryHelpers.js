@@ -19,8 +19,12 @@ function findByID(id) {
 function approve(id) {
   return findByID(id)
     .then(story => {
-      return db('acceptedStories').insert(story[0])
+      return db('acceptedStories').returning('id').insert(story[0])
     })
+}
+
+function modify(id) {
+  return db('pendingStories').where({id}).update()
 }
 module.exports = {
   add,

@@ -12,8 +12,13 @@ function findByName(storyName) {
   return db('acceptedStories').where({storyName})
 }
 
+function deleteByID(id) {
+  return db('acceptedStories').where({id}).del()
+}
+
 module.exports = {
   find,
   findByID,
-  findByName
+  findByName,
+  deleteByID
 }

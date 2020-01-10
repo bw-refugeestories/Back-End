@@ -2,12 +2,12 @@ const cloudinary = require('cloudinary').v2;
 const express = require('express');
 const router = express.Router();
 const helpers = require('./pendingStoryHelpers')
-const multer = require('multer')
-const upload = multer({dest: "uploads/"});
+// const multer = require('multer')
+// const upload = multer({dest: "uploads/"});
 const protected = require('../middleware/restricted-middleware');
 
 
-router.post('/add', upload.single('image'), (req, res) => {
+router.post('/add', (req, res) => {
   console.log(req.body)
 
   async function addStory() {
@@ -16,13 +16,17 @@ router.post('/add', upload.single('image'), (req, res) => {
     var imgURL = 'https://res.cloudinary.com/dce9vfmth/image/upload/v1578337504/migration-3129299_1920_ul2pcc.jpg';
     
     
-    if (req.file) {
-      await cloudinary.uploader.upload(req.file.path, function(error, result) {
-      console.log(error, result);
-      imgURL = result.url
-      })
-    };
-    console.log(imgURL)
+    // if (req.file) {
+    //   await cloudinary.uploader.upload(req.file.path, function(error, result) {
+    //   console.log(error, result);
+    //   imgURL = result.url
+    //   })
+    // }; Cool thing I did with uploads, works with php. Save for later
+
+    if (req.body.image) {
+      imgURL = req.body.image
+    }
+
     const storyInfo = {storyName: storyName, storyImg: imgURL, storyContent: storyContent}
     
     helpers.add(storyInfo)
@@ -42,13 +46,18 @@ router.post('/approve/:id', protected, (req, res) => {
 
   helpers.approve(id)
     .then(result => {
+      const newID = result
       helpers.deleteByID(id)
-      .then(res.status(202).json({message: 'Successfully approved!'}))
+      .then(res.status(202).json({message: 'Successfully approved!', newID: newID}))
       .catch(err => {res.status(500).json(err)})
     })
     .catch(err => {
       res.status(500).json({message: 'There was an error with the server'})
     })
+})
+
+router.put('/modify/:id', (req, res) => {
+
 })
 
 router.delete('/delete/:id', protected, (req, res) => {
