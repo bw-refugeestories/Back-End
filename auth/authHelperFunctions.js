@@ -25,7 +25,7 @@ function deleteByID(id) {
 }
 
 function modify(id, usernameUpdate, passwordUpdate, firstNameUpdate, lastNameUpdate) {
-  return db('admins').where({id}).update({username: usernameUpdate, password: passwordUpdate, firstName: firstNameUpdate, lastName: lastNameUpdate}).returning('id', 'username', 'firstName', 'lastName', 'password')
+  return db('admins').where({id}).update({username: usernameUpdate, password: passwordUpdate, firstName: firstNameUpdate, lastName: lastNameUpdate}, ['id', 'username', 'firstName', 'lastName', 'password'])
 }
 
 module.exports = {
@@ -33,5 +33,6 @@ module.exports = {
   find,
   findByID,
   findByFilter,
-  deleteByID
+  deleteByID,
+  modify
 }
