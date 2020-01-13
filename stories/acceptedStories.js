@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const helpers = require('./acceptedStoryHelpers');
-const protected = require('../middleware/restricted-middleware');
+const protect = require('../middleware/restricted-middleware');
 
 router.get('/', (req, res) => {
   helpers.find()
@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
-router.delete('/delete/:id', protected, (req, res) => {
+router.delete('/delete/:id', protect, (req, res) => {
   const {id} = req.params;
 
   helpers.deleteByID(id)
@@ -32,7 +32,7 @@ router.delete('/delete/:id', protected, (req, res) => {
     })
 })
 
-router.put('/modify/:id', protected, (req, res) => {
+router.put('/modify/:id', protect, (req, res) => {
   const {id} = req.params;
   const contentUpdate = req.body.storyContent;
   const imageUpdate = req.body.storyImg;
